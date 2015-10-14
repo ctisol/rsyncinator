@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'rsyncinator'
-  s.version     = '0.0.0'
-  s.date        = '2015-08-21'
-  s.summary     = "Rsync between roles"
-  s.description = "Capistrano Plugin to rsync between roles"
+  s.version     = '0.1.0'
+  s.date        = '2015-10-13'
+  s.summary     = "Define and run Rsyncs repeatably"
+  s.description = "Capistrano Plugin to run Rsyncs repeatably"
   s.authors     = ["david amick"]
   s.email       = "davidamick@ctisolutionsinc.com"
   s.files       = [

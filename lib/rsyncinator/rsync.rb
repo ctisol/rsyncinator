@@ -9,8 +9,13 @@ task :rsync do
         else
           execute "mkdir", "-p", Pathname.new(fetch(:rsync_log_file)).split.first.to_s
           host.properties.rsyncs.each do |sync|
-            sync[:dirs].each do |source, destination|
-              rsync(host, sync[:from], source, destination)
+            sync[:dir_sets].each do |dir_set|
+              dir_set[:excludes] ||= []
+              set :rsync_excludes,      dir_set[:excludes].collect { |exclude| "--exclude '#{exclude.to_s}'" }.join(' ')
+              set :rsync_from_host,     sync[:from]
+              set :rsync_source,        dir_set[:from_dir]
+              set :rsync_destination,   dir_set[:to_dir]
+              rsync(host)
             end
           end
         end

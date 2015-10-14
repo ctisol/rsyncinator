@@ -2,12 +2,12 @@ set :rsync_user,        -> { fetch(:deployment_username) }
 set :rsync_log_file,    -> { shared_path.join('log', 'rsyncinator.log') }
 set :rsync_tail_lines,  "10"
 
-def rsync(host, from_host, source, destination)
+def rsync(host)
   execute(
-    "rsync", "-ah", fetch(:rsync_options),
+    "rsync", "-ah", fetch(:rsync_options), fetch(:rsync_excludes),
     "--rsh", "\"ssh", "-o", "PasswordAuthentication=no", "-o", "StrictHostKeyChecking=no\"",
     "--log-file", fetch(:rsync_log_file),
-    "#{fetch(:rsync_user)}@#{from_host}:#{source}", destination
+    "#{fetch(:rsync_user)}@#{fetch(:rsync_from_host)}:#{fetch(:rsync_source)}", fetch(:rsync_destination)
   )
 end
 

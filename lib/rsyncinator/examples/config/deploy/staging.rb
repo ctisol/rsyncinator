@@ -5,10 +5,18 @@ server "my-app-stage.example.com",
   :rsyncs                             => [ # rsyncinator
     {
       :from                             => "my-app.example.com",
-      :dirs                             => {
-        shared_path.join("var", "images") => shared_path.join("var", "images"),
-        shared_path.join("public", "images") => shared_path.join("public", "images")
-      }
+      :dir_sets                         => [
+        {
+          :from_dir   => shared_path.join("var", "images"),
+          :to_dir     => shared_path.join("var", "images"),
+          :excludes   => [shared_path.join("var", "tmp"), "*.tmp"]
+        },
+        {
+          :from_dir   => shared_path.join("public", "assets"),
+          :to_dir     => shared_path.join("public", "assets"),
+          :excludes   => ["tmp/*"]
+        }
+      ]
     }
   ]
 ### ------------------------------------------------------------------
