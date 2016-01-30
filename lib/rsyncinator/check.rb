@@ -2,7 +2,7 @@ namespace :rsync do
   namespace :check do
 
     desc 'Ensure all rsyncinator specific settings are set, and warn and exit if not.'
-    task :settings do
+    task :settings => 'deployinator:load_settings' do
       {
         (File.dirname(__FILE__) + "/examples/config/deploy.rb") => 'config/deploy.rb',
         (File.dirname(__FILE__) + "/examples/config/deploy/staging.rb") => "config/deploy/#{fetch(:stage)}.rb"
@@ -14,7 +14,7 @@ namespace :rsync do
 
     namespace :settings do
       desc 'Print example rsyncinator specific settings for comparison.'
-      task :print do
+      task :print => 'deployinator:load_settings' do
         set :print_all, true
         Rake::Task['rsync:check:settings'].invoke
       end

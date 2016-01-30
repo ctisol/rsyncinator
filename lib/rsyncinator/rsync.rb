@@ -1,5 +1,5 @@
 desc "Rsync according to each host's settings"
-task :rsync do
+task :rsync => 'deployinator:load_settings' do
   on roles(:all) do |host|
     as :root do
       with :ssh_auth_sock => capture("echo $SSH_AUTH_SOCK") do
@@ -27,27 +27,27 @@ end
 namespace :rsync do
 
   desc "Rsync according to each host's settings using the --dry-run option"
-  task :dry do
+  task :dry => 'deployinator:load_settings' do
     set :rsync_options, "--dry-run"
     Rake::Task["rsync"].invoke
   end
 
   desc "Rsync according to each host's settings using the --delete option"
-  task :delete do
+  task :delete => 'deployinator:load_settings' do
     set :rsync_options, "--delete"
     Rake::Task["rsync"].invoke
   end
 
   namespace :delete do
     desc "Rsync according to each host's settings using the --delete and --dry-run options"
-    task :dry do
+    task :dry => 'deployinator:load_settings' do
       set :rsync_options, "--dry-run --delete"
       Rake::Task["rsync"].invoke
     end
   end
 
   desc "Show the latest sync in the log file"
-  task :log do
+  task :log => 'deployinator:load_settings' do
     on roles(:all), in: :sequence do |host|
       as :root do
         info "Latest Rsync run on #{host}"
@@ -58,7 +58,7 @@ namespace :rsync do
 
   namespace :log do
     desc "Show the last few lines of the sync's log file"
-    task :tail do
+    task :tail => 'deployinator:load_settings' do
       on roles(:all), in: :sequence do |host|
         as :root do
           info "From #{host}:"

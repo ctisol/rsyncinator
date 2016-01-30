@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version  =                '>= 1.9.3'
   s.requirements           <<               "Rsync"
   s.add_runtime_dependency 'capistrano',    '~> 3.2.1'
-  s.add_runtime_dependency 'deployinator',  '~> 0.1.3'
+  s.add_runtime_dependency 'deployinator',  '~> 0.2.0'
   s.add_runtime_dependency 'colorize',      '= 0.7.3'
   s.add_runtime_dependency 'rake',          '~> 10.3.2'
   s.add_runtime_dependency 'sshkit',        '~> 1.5.1'
