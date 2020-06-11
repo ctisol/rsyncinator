@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.date        = '2015-10-13'
   s.summary     = "Define and run Rsyncs repeatably"
   s.description = "Capistrano Plugin to run Rsyncs repeatably"
-  s.authors     = ["david amick"]
-  s.email       = "davidamick@ctisolutionsinc.com"
+  s.authors     = ["Kishore", "Dhanesh"]
+  s.email       = "kishore@railsfactory.com"
   s.files       = [
     "lib/rsyncinator.rb",
     "lib/rsyncinator/rsync.rb",
@@ -19,11 +19,11 @@ Gem::Specification.new do |s|
   s.required_ruby_version  =                '>= 1.9.3'
   s.requirements           <<               "Rsync"
   s.add_runtime_dependency 'capistrano',    '~> 3.2.1'
-  s.add_runtime_dependency 'deployinator',  '~> 0.2.0'
+  s.add_runtime_dependency 'deployinator'
   s.add_runtime_dependency 'colorize',      '= 0.7.3'
   s.add_runtime_dependency 'rake',          '~> 10.3.2'
   s.add_runtime_dependency 'sshkit',        '~> 1.5.1'
   s.homepage    =
-    'https://github.com/snarlysodboxer/rsyncinator'
+    'https://github.com/ctisol/rsyncinator'
   s.license     = 'GNU'
 end
